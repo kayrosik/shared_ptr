@@ -4,8 +4,8 @@
 using namespace std;
  
 SCENARIO("count", "[count]"){
-  stack<int> s;
-  s.push(1);
+ shared_ptr<size_t> s;
   REQUIRE(s.count()==1);
+ REQUIRE(s.get()==nullptr);
 }
 
