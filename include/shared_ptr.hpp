@@ -83,7 +83,7 @@ shared_ptr<T>::~shared_ptr(){
     if (count) {
         if (count == 1) {
             count==0;
-            delete ptr;
+            delete ptr_;
         }
         else count--;
     }
