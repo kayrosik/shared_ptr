@@ -8,7 +8,8 @@ public:
     auto operator= (shared_ptr const & other)->shared_ptr &;
     auto operator =(shared_ptr && other) -> shared_ptr &;
     auto operator ->() const -> T *;
-    auto operator *() const -> T *
+    auto operator *() const -> T *;
+   auto get() const noexcept -> T *;
     ~shared_ptr();
     auto count() const->size_t;
  
@@ -17,6 +18,11 @@ private:
     size_t count;
 };
 //_____________________________________________________________________________________________________
+template<typename T> /*noexcept*/
+auto shared_ptr<T>::get() const noexcept -> T * {
+	return pointer_;
+}
+
 template<typename T>
 shared_ptr<T>::shared_ptr():ptr_(nullptr), count(0){}
  
