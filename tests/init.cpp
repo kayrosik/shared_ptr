@@ -3,23 +3,23 @@
 #include <iostream>
 
  
-SCENARIO("count", "[count]"){
+SCENARIO("count and get for empty shared", "[count&get]"){
  shared_ptr<size_t> s;
   REQUIRE(s.count()==0);
  REQUIRE(s.get()==nullptr);
 }
 
-SCENARIO("count1", "[count1]"){
+SCENARIO("get for shared initialize", "[getInShared]"){
  shared_ptr<size_t> s(new size_t[10]);
  REQUIRE(s.get()!=nullptr);
 }
-SCENARIO("SP: get", "[get]") {
+SCENARIO("Initialize Shared", "[InShGet]") {
 	size_t * ptr = new size_t[10];
-	shared_ptr<size_t> sp(ptr);
+	shared_ptr<size_t> s(ptr);
 
-	REQUIRE(ptr == sp.get());
+	REQUIRE(ptr == s.get());
 }
-SCENARIO("SP: use_count", "[use_count]") {
+SCENARIO("Checking count", "[CheckCount]") {
 	size_t * ptr = new size_t[10];
 	shared_ptr<size_t> f_sp(ptr);
 
