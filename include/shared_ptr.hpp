@@ -20,13 +20,13 @@ private:
     size_t count_;
 };
 
-template <class T, class... Args>
+/*template <class T, class... Args>
 shared_ptr<T> make_shared(Args&& ...args);
 
 template<class T, class ...Args>
 shared_ptr<T> make_shared(Args && ...args) {
 	return shared_ptr<T>(new T(std::forward<Args>(args)...));
-}
+}*/
 
 //_____________________________________________________________________________________________________
 template<typename T> /*noexcept*/
