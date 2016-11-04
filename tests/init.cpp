@@ -9,3 +9,8 @@ SCENARIO("count", "[count]"){
  REQUIRE(s.get()==nullptr);
 }
 
+SCENARIO("count1", "[count1]"){
+ shared_ptr<size_t> s(new size_t[10]);
+ REQUIRE(s.get()!=nullptr);
+}
+
