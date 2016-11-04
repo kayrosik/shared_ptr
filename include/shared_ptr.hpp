@@ -17,7 +17,7 @@ public:
  
 private:
     T* ptr_;
-    size_t count;
+    size_t count_;
 };
 
 template <class T, class... Args>
@@ -29,36 +29,36 @@ auto shared_ptr<T>::get() const noexcept -> T * {
 }
 
 template<typename T>
-shared_ptr<T>::shared_ptr():ptr_(nullptr), count(0){}
+shared_ptr<T>::shared_ptr():ptr_(nullptr), count_(0){}
  
 template<typename T>
-shared_ptr<T>::shared_ptr(T * ptr): ptr_(ptr), count(1){}
+shared_ptr<T>::shared_ptr(T * ptr): ptr_(ptr), count_(1){}
  
 template<typename T>
-shared_ptr<T>::shared_ptr(shared_ptr const & other) : count(other.count), ptr_(other.ptr_) { 
-    count++; 
+shared_ptr<T>::shared_ptr(shared_ptr const & other) : count_(other.count_), ptr_(other.ptr_) { 
+    count_++; 
 }
  
 template<typename T>
 auto shared_ptr<T>::operator=(shared_ptr const & other)->shared_ptr & {
     if (this != &other) {
-        if (count) {
-            if (count == 1) {
-                count==0;
+        if (count_) {
+            if (count_ == 1) {
+                count_=0;
                 delete ptr_;
             }
-            else count--;
+            else count_--;
         }
  
         ptr_ = other.ptr_;
-        count = other.count;
-        count++;
+        count_ = other.count_;
+        count_++;
     }
     return *this;
 }
 
 template<typename T>
- shared_ptr<T>::shared_ptr(shared_ptr && other): ptr_(other.ptr_),count(other.count)
+ shared_ptr<T>::shared_ptr(shared_ptr && other): ptr_(other.ptr_),count_(other.count_)
     {
         other.ptr_ = nullptr;
     }
@@ -67,16 +67,16 @@ template<typename T>
     auto shared_ptr<T>::operator =(shared_ptr && other) -> shared_ptr &
     {
         if (this != &other) {
-        if (count) {
-            if (count == 1) {
-                count==0;
+        if (count_) {
+            if (count_ == 1) {
+                count_=0;
                 delete ptr_;
             }
-            else count--;
+            else count_--;
         }
  
         ptr_ = other.ptr_;
-        count = other.count;
+        count_ = other.count_;
        other.ptr_=nullptr;
     }
     return *this;
@@ -85,18 +85,18 @@ template<typename T>
  
 template<typename T>
 shared_ptr<T>::~shared_ptr(){
-    if (count) {
-        if (count == 1) {
-            count==0;
+    if (count_) {
+        if (count_ == 1) {
+            count_=0;
             delete ptr_;
         }
-        else count--;
+        else count_--;
     }
 }
  
 template<typename T>
 auto shared_ptr<T>:count() const->size_t{
-    return (count) ? count : 0;
+    return (count_) ? count_ : 0;
 }
  template<typename T>
  auto shared_ptr<T>::operator ->() const -> T *
