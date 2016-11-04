@@ -19,6 +19,9 @@ private:
     T* ptr_;
     size_t count;
 };
+
+template <class T, class... Args>
+shared_ptr<T> make_shared(Args&& ...args);
 //_____________________________________________________________________________________________________
 template<typename T> /*noexcept*/
 auto shared_ptr<T>::get() const noexcept -> T * {
