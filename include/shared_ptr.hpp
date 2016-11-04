@@ -95,7 +95,7 @@ shared_ptr<T>::~shared_ptr(){
 }
  
 template<typename T>
-auto shared_ptr<T>:count() const->size_t{
+auto shared_ptr<T>::count() const->size_t{
     return (count_) ? count_ : 0;
 }
  template<typename T>
