@@ -51,8 +51,8 @@ auto shared_ptr<T>::operator =(const shared_ptr & other) -> shared_ptr & {
 		this->~shared_ptr();
 		ptr_ = nullptr;
 		count_ = nullptr;
-		pointer_ = other.pointer_;
-		counter_ = other.counter_;
+		ptr_ = other.ptr_;
+		count_ = other.count_;
 		++(*count_);
 	}
 	return *this;
@@ -69,8 +69,8 @@ template<typename T>
     {
         if (this != &other) {
         if (count_) {
-            if (count_ == 1) {
-                count_=0;
+            if (*count_ == 1) {
+                delete count_;
                 delete ptr_;
             }
             else count_--;
@@ -79,6 +79,7 @@ template<typename T>
         ptr_ = other.ptr_;
         count_ = other.count_;
        other.ptr_=nullptr;
+		other.count_=nullptr;
     }
     return *this;
     }
@@ -87,11 +88,11 @@ template<typename T>
 template<typename T>
 shared_ptr<T>::~shared_ptr(){
     if (count_) {
-        if (count_ == 1) {
+        if (*count_ == 1) {
             delete count_;
             delete ptr_;
         }
-        else count_--;
+        else (*count_)--;
     }
 }
  
