@@ -5,7 +5,7 @@
  
 SCENARIO("count", "[count]"){
  shared_ptr<size_t> s;
-  REQUIRE(s.count()==1);
+  REQUIRE(s.count()==0);
  REQUIRE(s.get()==nullptr);
 }
 
