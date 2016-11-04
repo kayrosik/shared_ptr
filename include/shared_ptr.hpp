@@ -20,7 +20,7 @@ private:
 //_____________________________________________________________________________________________________
 template<typename T> /*noexcept*/
 auto shared_ptr<T>::get() const noexcept -> T * {
-	return pointer_;
+	return ptr_;
 }
 
 template<typename T>
