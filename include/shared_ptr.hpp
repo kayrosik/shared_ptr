@@ -9,9 +9,10 @@ public:
     shared_ptr(shared_ptr && other);
     auto operator= (shared_ptr const & other)->shared_ptr &;
     auto operator =(shared_ptr && other) -> shared_ptr &;
+    auto swap(shared_ptr& r) noexcept -> void;
     auto operator ->() const -> T *;
     auto operator *() const -> T *;
-   auto get() const noexcept -> T *;
+    auto get() const noexcept -> T *;
     ~shared_ptr();
     auto count() const->size_t;
  
@@ -20,18 +21,20 @@ private:
     size_t *count_;
 };
 
-/*template <class T, class... Args>
-shared_ptr<T> make_shared(Args&& ...args);
-
-template<class T, class ...Args>
-shared_ptr<T> make_shared(Args && ...args) {
-	return shared_ptr<T>(new T(std::forward<Args>(args)...));
-}*/
-
 //_____________________________________________________________________________________________________
-template<typename T> /*noexcept*/
+//_____________________________________________________________________________________________________
+//_____________________________________________________________________________________________________
+//_____________________________________________________________________________________________________
+
+template<typename T> 
 auto shared_ptr<T>::get() const noexcept -> T * {
 	return ptr_;
+}
+
+template<typename T> 
+auto shared_ptr<T>::swap(shared_ptr & other) noexcept -> void {
+	std::swap(ptr_, other.ptr_);
+	std::swap(count_, other.count_);
 }
 
 template<typename T>
@@ -62,26 +65,14 @@ template<typename T>
  shared_ptr<T>::shared_ptr(shared_ptr && other): ptr_(other.ptr_),count_(other.count_)
     {
         other.ptr_ = nullptr;
+	 other.count_=nullptr;
     }
     
     template<typename T>
     auto shared_ptr<T>::operator =(shared_ptr && other) -> shared_ptr &
     {
-        if (this != &other) {
-        if (count_) {
-            if (*count_ == 1) {
-                delete count_;
-                delete ptr_;
-            }
-            else count_--;
-        }
- 
-        ptr_ = other.ptr_;
-        count_ = other.count_;
-       other.ptr_=nullptr;
-		other.count_=nullptr;
-    }
-    return *this;
+        swap(other);
+	return *this;
     }
 
  
