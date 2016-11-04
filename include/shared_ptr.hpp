@@ -4,7 +4,7 @@ template <typename T>
 class shared_ptr {
 public:
     shared_ptr();
-    shared_ptr(T* ptr);
+    explicit shared_ptr(T* ptr);
     shared_ptr(shared_ptr const & other);
     shared_ptr(shared_ptr && other);
     auto operator= (shared_ptr const & other)->shared_ptr &;
