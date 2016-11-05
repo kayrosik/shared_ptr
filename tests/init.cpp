@@ -40,7 +40,7 @@ SCENARIO("My","[MY]"){
 
 shared_ptr<size_t> s;
 shared_ptr<size_t> s2(s);
-REQUIRE(s2.count()==2);
+REQUIRE(s2.count()==0);
 }
 
 
