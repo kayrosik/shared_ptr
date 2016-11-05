@@ -5,14 +5,14 @@ template <typename T>
 class shared_ptr {
 public:
     shared_ptr();/*noexcept*/
-    shared_ptr(T* ptr);/*noexcept*/
+    shared_ptr(T* ptr);/*strong*/
     shared_ptr(shared_ptr const & other);
-    shared_ptr(shared_ptr && other);
-    auto operator= (shared_ptr const & other)->shared_ptr &;
-    auto operator =(shared_ptr && other) -> shared_ptr &;
+    shared_ptr(shared_ptr && other);/*noexcept*/
+    auto operator= (shared_ptr const & other)->shared_ptr &;/*noexcept*/
+    auto operator =(shared_ptr && other) -> shared_ptr &;/*noexcept*/
     auto swap(shared_ptr& r) noexcept -> void;/*noexcept*/
-    auto operator ->() const -> T *;/*noexcept*/
-    auto operator *() const -> T *;/*noexcept*/
+    auto operator ->() const -> T *;/*strong*/
+    auto operator *() const -> T *;/*strong*/
     auto get() const noexcept -> T *;/*noexcept*/
     ~shared_ptr();
     auto count() const->size_t;/*noexcept*/
