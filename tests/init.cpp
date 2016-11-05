@@ -37,7 +37,7 @@ SCENARIO("Checking count", "[CheckCount]") {
 	REQUIRE(t_sp.count() == 3);
 }
 SCENARIO("MY","[MINE]"){
-shared_ptr sptr1;
-shared_ptr sptr2{ sptr1 };
+shared_ptr<size_t> sptr1;
+shared_ptr<size_t> sptr2{ sptr1 };
 REQUIRE(sptr2.get()!=nullptr);
-}
+}    
