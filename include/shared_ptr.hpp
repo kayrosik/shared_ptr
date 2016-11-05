@@ -88,9 +88,9 @@ auto shared_ptr<T>::count() const->size_t{
 }
 template<typename T>
 auto shared_ptr<T>::operator ->() const -> T *{
-        if(count_) {return *ptr_}else {throw std::logic_error("Error");}
+        if(count_) {return ptr_;}else {throw std::logic_error("Error");}
 }
 template<typename T>
 auto shared_ptr<T>::operator *() const -> T *{
-       if(count_) {return *ptr_}else {throw std::logic_error("Error");}
+       if(count_) {return *ptr_;}else {throw std::logic_error("Error");}
 }
