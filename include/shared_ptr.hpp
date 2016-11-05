@@ -51,12 +51,7 @@ shared_ptr<T>::shared_ptr(shared_ptr const & other) : count_(other.count_), ptr_
 template<typename T>
 auto shared_ptr<T>::operator =(const shared_ptr & other) -> shared_ptr & {
 	if (this != &other) {
-		this->~shared_ptr();
-		ptr_ = nullptr;
-		count_ = nullptr;
-		ptr_ = other.ptr_;
-		count_ = other.count_;
-		++(*count_);
+		(shared_ptr<T>(other)).swap(this);
 	}
 	return *this;
 }
