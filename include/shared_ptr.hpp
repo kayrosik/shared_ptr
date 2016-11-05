@@ -5,7 +5,7 @@ template <typename T>
 class shared_ptr {
 public:
     shared_ptr();/*noexcept*/
-   explicit shared_ptr(T* ptr);/*noexcept*/
+    shared_ptr(T* ptr);/*noexcept*/
     shared_ptr(shared_ptr const & other);
     shared_ptr(shared_ptr && other);
     auto operator= (shared_ptr const & other)->shared_ptr &;
@@ -26,6 +26,11 @@ private:
 //_____________________________________________________________________________________________________
 //_____________________________________________________________________________________________________
 //_____________________________________________________________________________________________________
+template <typename T, class ...Args>
+auto make_shared( Args && ...args ) -> shared_ptr<T>
+{
+    return shared_ptr<T>( new T( std::forward<Args>(args)... ) );
+}
 
 template<typename T> 
 auto shared_ptr<T>::get() const noexcept -> T * {
