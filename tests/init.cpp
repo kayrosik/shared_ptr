@@ -20,6 +20,10 @@ SCENARIO("Initialize Shared", "[InShGet]") {
 	REQUIRE(ptr == s.get());
 }
 SCENARIO("Checking count", "[CheckCount]") {
+	
+	shared_ptr<size_t> sptr1;
+	shared_ptr<size_t> sptr2{ sptr1 };
+	
 	size_t * ptr = new size_t[10];
 	shared_ptr<size_t> f_sp(ptr);
 
