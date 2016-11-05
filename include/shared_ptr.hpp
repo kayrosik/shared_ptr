@@ -5,7 +5,7 @@ template <typename T>
 class shared_ptr {
 public:
     shared_ptr();/*noexcept*/
-    shared_ptr(T* ptr);/*noexcept*/
+   explicit shared_ptr(T* ptr);/*noexcept*/
     shared_ptr(shared_ptr const & other);
     shared_ptr(shared_ptr && other);
     auto operator= (shared_ptr const & other)->shared_ptr &;
@@ -95,3 +95,7 @@ template<typename T>
 auto shared_ptr<T>::operator *() const -> T *{
        if(count_) {return *ptr_;}else {throw std::logic_error("Error");}
 }
+
+
+
+
