@@ -66,7 +66,7 @@ template<typename T>
     template<typename T>
     auto shared_ptr<T>::operator =(shared_ptr && other) -> shared_ptr &
     {
-        swap(other);
+        this->swap(other);
 	return *this;
     }
 
