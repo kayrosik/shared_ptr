@@ -10,7 +10,7 @@ public:
     shared_ptr(shared_ptr && other);/*noexcept*/
     auto operator= (shared_ptr const & other)->shared_ptr &;/*noexcept*/
     auto operator =(shared_ptr && other) -> shared_ptr &;/*noexcept*/
-    auto swap(shared_ptr& r) noexcept -> void;/*noexcept*/
+    auto swap(shared_ptr& other) noexcept -> void;/*noexcept*/
     auto operator ->() const -> T *;/*strong*/
     auto operator *() const -> T *;/*strong*/
     auto get() const noexcept -> T *;/*noexcept*/
@@ -18,6 +18,7 @@ public:
     auto count() const->size_t;/*noexcept*/
  
 private:
+    auto swap(shared_ptr&& other) noexcept -> void;
     T* ptr_;
     size_t *count_;
 };
@@ -39,6 +40,12 @@ auto shared_ptr<T>::get() const noexcept -> T * {
 
 template<typename T> 
 auto shared_ptr<T>::swap(shared_ptr & other) noexcept -> void {
+	std::swap(ptr_, other.ptr_);
+	std::swap(count_, other.count_);
+}
+
+template<typename T>
+auto swap(shared_ptr&& other) noexcept -> void{
 	std::swap(ptr_, other.ptr_);
 	std::swap(count_, other.count_);
 }
