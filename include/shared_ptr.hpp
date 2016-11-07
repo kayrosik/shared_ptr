@@ -18,7 +18,7 @@ public:
     auto count() const->size_t;/*noexcept*/
  
 private:
-   // auto swap(shared_ptr&& other) noexcept -> void;
+   auto swap(shared_ptr&& other) noexcept -> void;
     T* ptr_;
     size_t *count_;
 };
@@ -44,11 +44,11 @@ auto shared_ptr<T>::swap(shared_ptr & other) noexcept -> void {
 	std::swap(count_, other.count_);
 }
 
-/*template<typename T>
-auto swap(shared_ptr&& other) noexcept -> void{
-	ptr_=std::move(other.ptr_);
-	count_=std::move(other.count_);
-}*/
+template<typename T>
+auto shared_ptr<T>::swap(shared_ptr && other) noexcept -> void{
+	std::swap(ptr_, other.ptr_);
+	std::swap(count_, other.count_);
+}
 
 template<typename T>
 shared_ptr<T>::shared_ptr():ptr_(nullptr), count_(nullptr){}
